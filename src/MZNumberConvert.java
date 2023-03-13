@@ -95,7 +95,7 @@ public class MZNumberConvert {
         else if(c==0 && b==2 && a==0){
             return hyphen+hun5[2];
         }
-        else if(c==0 && b!=0 &&  a!=0){
+        else if(c==0 && b!=0){
             return hyphen+hun4[b]+hun1[a];
         }
         else if(c!=0 && b==0 && a==0){
@@ -132,7 +132,7 @@ public class MZNumberConvert {
         else if(c==0 && b==2 && a==0){
             return hyphen+hun5[2]+x;
         }
-        else if(c==0 && b!=0 && a!=0){
+        else if(c==0 && b!=0){
             return hyphen+hun4[b]+hun1[a]+x;
         }
         else if(c!=0 && b==0 && a==0){
