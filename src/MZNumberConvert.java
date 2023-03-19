@@ -22,6 +22,16 @@ public class MZNumberConvert {
     private static final String[] hun5 = new String[]{"nulla","tíz","húsz"};
     private static final String[] hun6 = new String[]{"száz","ezer","milllió","milliárd"};
     private static final String[] hun7 = new String[]{"","minusz "};
+    private static String splitStr;
+
+    public MZNumberConvert(String splitStr){
+        if(splitStr==null){
+            MZNumberConvert.splitStr="";
+        }
+        else{
+            MZNumberConvert.splitStr=splitStr;
+        }
+    }
     
     public String conversionNumberName(int number, String language){
         if(language==("hu").toLowerCase()){
@@ -59,8 +69,11 @@ public class MZNumberConvert {
             }
             return hun7[negative]+
             reviewNumber(reverseArray[9], reverseArray[10], reverseArray[11], reverseArray, 12, hun6[3])+
+            splitStr+
             reviewNumber(reverseArray[6], reverseArray[7], reverseArray[8], reverseArray, 9, hun6[2])+
+            splitStr+
             reviewNumber(reverseArray[3], reverseArray[4], reverseArray[5], reverseArray, 6, hun6[1])+
+            splitStr+
             reviewNumber(reverseArray[0], reverseArray[1], reverseArray[2], reverseArray, 3);
         }
         else{
@@ -95,7 +108,7 @@ public class MZNumberConvert {
         else if(c==0 && b==2 && a==0){
             return hyphen+hun5[2];
         }
-        else if(c==0 && b!=0 &&  a!=0){
+        else if(c==0 && b!=0){
             return hyphen+hun4[b]+hun1[a];
         }
         else if(c!=0 && b==0 && a==0){
@@ -132,7 +145,7 @@ public class MZNumberConvert {
         else if(c==0 && b==2 && a==0){
             return hyphen+hun5[2]+x;
         }
-        else if(c==0 && b!=0 && a!=0){
+        else if(c==0 && b!=0){
             return hyphen+hun4[b]+hun1[a]+x;
         }
         else if(c!=0 && b==0 && a==0){
