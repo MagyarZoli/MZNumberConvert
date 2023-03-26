@@ -1,4 +1,5 @@
 import java.lang.ArrayIndexOutOfBoundsException;
+import java.math.BigInteger;
 
 /**
  * This program converts the requested number into its Hungarian word representation using the defined rules and mappings. 
@@ -11,7 +12,7 @@ import java.lang.ArrayIndexOutOfBoundsException;
  * @param number number you want to convert
  * @param language language selection, according to which spelling rules to convert the number
  * @see  java.lang.ArrayIndexOutOfBoundsException
- * @since 1.0
+ * @since 1.2
  * @author <a href=https://github.com/MagyarZoli>Magyar Zoltán</a>
  */
 public class MZNumberConvert { 
@@ -24,6 +25,10 @@ public class MZNumberConvert {
     private static final String[] hun7 = new String[]{"","minusz "};
     private static String splitStr;
 
+    public MZNumberConvert(){
+        MZNumberConvert.splitStr="";
+    }
+    
     public MZNumberConvert(String splitStr){
         if(splitStr==null){
             MZNumberConvert.splitStr="";
@@ -32,20 +37,21 @@ public class MZNumberConvert {
             MZNumberConvert.splitStr=splitStr;
         }
     }
-    
-    public String conversionNumberName(int number, String language){
+
+    public String conversionNumberName(BigInteger number, String language){
         if(language==("hu").toLowerCase()){
             return hunNumberName(number);
         }   
         return null;
     }
 
-    private static String hunNumberName(int number){
-        if(number!=0){
+    private static String hunNumberName(BigInteger number){
+        int compareValue = number.compareTo(new BigInteger("0"));
+        if(compareValue>0 || compareValue<0){
             char[] charArray = String.valueOf(number).toCharArray();
             int[] numberArray = new int[charArray.length];
             int j=0, negative=0;
-            if(number>0){
+            if(compareValue>0){
                 for(int i=charArray.length-1; i>=0; i--){
                     numberArray[j]=Character.getNumericValue(charArray[i]);
                     j++; 
@@ -69,18 +75,15 @@ public class MZNumberConvert {
             }
             return hun7[negative]+
             reviewNumber(reverseArray[9], reverseArray[10], reverseArray[11], reverseArray, 12, hun6[3])+
-            splitStr+
             reviewNumber(reverseArray[6], reverseArray[7], reverseArray[8], reverseArray, 9, hun6[2])+
-            splitStr+
             reviewNumber(reverseArray[3], reverseArray[4], reverseArray[5], reverseArray, 6, hun6[1])+
-            splitStr+
-            reviewNumber(reverseArray[0], reverseArray[1], reverseArray[2], reverseArray, 3);
+            reviewNumber(reverseArray[0], reverseArray[1], reverseArray[2], reverseArray, 3 );
         }
         else{
             return hun5[0];
         }
     }
-    
+
     private static String reviewNumber(int a, int b, int c, int[] d, int index){
         String hyphen = "";
         for(int i=index; i<d.length; i++){
@@ -97,31 +100,31 @@ public class MZNumberConvert {
             }
         }
         if(c==0 && b==0 && a==0){
-            return "";
+            return splitStr+"";
         }
         else if(c==0 && b==0 && a!=0){
-            return hyphen+hun1[a];
+            return hyphen+splitStr+hun1[a];
         }
         else if(c==0 && b==1 && a==0){
-            return hyphen+hun5[1];
+            return hyphen+splitStr+hun5[1];
         }
         else if(c==0 && b==2 && a==0){
-            return hyphen+hun5[2];
+            return hyphen+splitStr+hun5[2];
         }
         else if(c==0 && b!=0){
-            return hyphen+hun4[b]+hun1[a];
+            return hyphen+splitStr+hun4[b]+hun1[a];
         }
         else if(c!=0 && b==0 && a==0){
-            return hyphen+hun2[c]+hun6[0];
+            return hyphen+splitStr+hun2[c]+hun6[0];
         }
         else if(c!=0 && b==1 && a==0){
-            return hyphen+hun2[c]+hun6[0]+hun5[1];
+            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[1];
         }
         else if(c!=0 && b==2 && a==0){
-            return hyphen+hun2[c]+hun6[0]+hun5[2];
+            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[2];
         }
         else{
-            return hyphen+hun2[c]+hun6[0]+hun4[b]+hun1[a];
+            return hyphen+splitStr+hun2[c]+hun6[0]+hun4[b]+hun1[a];
         }
     }
 
@@ -134,31 +137,31 @@ public class MZNumberConvert {
             }
         }
         if(c==0 && b==0 && a==0){
-            return "";
+            return splitStr+"";
         }
         else if(c==0 && b==0 && a!=0){
-            return hyphen+hun2[a]+x;
+            return hyphen+splitStr+hun2[a]+x;
         }
         else if(c==0 && b==1 && a==0){
-            return hyphen+hun5[1]+x;
+            return hyphen+splitStr+hun5[1]+x;
         }
         else if(c==0 && b==2 && a==0){
-            return hyphen+hun5[2]+x;
+            return hyphen+splitStr+hun5[2]+x;
         }
         else if(c==0 && b!=0){
-            return hyphen+hun4[b]+hun1[a]+x;
+            return hyphen+splitStr+hun4[b]+hun1[a]+x;
         }
         else if(c!=0 && b==0 && a==0){
-            return hyphen+hun2[c]+hun6[0]+x;
+            return hyphen+splitStr+hun2[c]+hun6[0]+x;
         }
         else if(c!=0 && b==1 && a==0){
-            return hyphen+hun2[c]+hun6[0]+hun5[1]+x;
+            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[1]+x;
         }
         else if(c!=0 && b==2 && a==0){
-            return hyphen+hun2[c]+hun6[0]+hun5[2]+x;
+            return hyphen+splitStr+hun2[c]+hun6[0]+hun5[2]+x;
         }
         else{
-            return hyphen+hun2[c]+hun6[0]+hun4[b]+hun3[a]+x;
+            return hyphen+splitStr+hun2[c]+hun6[0]+hun4[b]+hun3[a]+x;
         }
     }
 }
