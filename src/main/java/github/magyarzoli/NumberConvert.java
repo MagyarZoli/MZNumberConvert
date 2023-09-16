@@ -1,5 +1,7 @@
 package github.magyarzoli;
 
+import lombok.*;
+
 import java.util.Arrays;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
  * @since       1.0
  * @author      <a href=https://github.com/MagyarZoli>Magyar Zoltán</a>
  */
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class NumberConvert {
 
     /**
@@ -96,42 +100,10 @@ public class NumberConvert {
     /**
      * A string used to separate different parts of the textual representation.
      */
+    @Getter
+    @Setter
+    @NonNull
     private String split;
-
-    /**
-     * A parameterless constructor that initializes the {@code split} to an empty string.
-     */
-    public NumberConvert() {
-        this.split = "";
-    }
-
-    /**
-     * A constructor that takes a {@code split} parameter and initializes the {@code split} field. If the provided
-     * {@code split} is {@code null}, it's treated as an empty string.
-     * @param       split A string used to separate different parts of the textual representation.
-     */
-    public NumberConvert(String split) {
-        if (split == null) {
-            this.split = "";
-        }
-        this.split = split;
-    }
-
-    /**
-     * Sets the value of the split field.
-     * @param       split A string used to separate different parts of the textual representation.
-     */
-    public void setSplit(String split) {
-        this.split = split;
-    }
-
-    /**
-     * Retrieves the value of the split field.
-     * @return      split a string used to separate different parts of the textual representation.
-     */
-    public String getSplit() {
-        return this.split;
-    }
 
     /**
      * {@code conversionNumberName} method is a public function that acts as an interface for converting a given
